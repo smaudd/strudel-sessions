@@ -91,14 +91,14 @@ const perc = n("<2 0 [3 2]>")
 
 const hpf = slider(0, 0, 1200)
 
-$: stack(
-  // kick.gain(1),
+stack(
+  kick.gain(1),
   // birds.gain(0.3),
-  // hh.gain(0.3).delay(0.125),
-  // hh2.gain(0.2),
+  hh.gain(0.3).delay(0.125),
+  hh2.gain(0.2),
   // cp.gain(0.4),
-  // perc.gain(0.8),
-  // bass.gain(0.7)
+  perc.gain(0.8),
+  bass.gain(0.7)
 )
 .hpf(hpf)
   // .bank("909")

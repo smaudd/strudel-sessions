@@ -27,7 +27,7 @@ const bassLong = note("c2 g2 g#3 g c c/2").s("z_sine,sine")
   // .size(10)
   .gain(1)
 
-const bass2 = note("a1 e2 ~ g2 g1").s("z_sine,sine")
+const bass2 = note("a1 e2 ~  ~ [g2 g1]").s("z_sine,sine")
   // .attack(0.1)
   .dec(0.45)
   .detune(2)
@@ -143,7 +143,7 @@ const sn = note("~ ~ ~ e")
   // .phaser(2)
   .gain(0.8)
 
-const sprinkle = n("0!8".add(berlin.fast(2).mul(12)))
+const sprinkle = n("0!8".add(berlin.fast(4).mul(14)))
   .scale("A:minor")
   .s("supersaw")
   .phaser(2)
@@ -154,21 +154,20 @@ const sprinkle = n("0!8".add(berlin.fast(2).mul(12)))
   .lpf(1500)
   .room(0.5)
   .delay(0.25)
-  .gain(0.2)
 
 $: stack(
   // kick909,
-  // kick.duckorbit(2).duckattack(0.2).duckdepth(0.6),
+  kick.duckorbit(2).duckattack(0.2).duckdepth(0.6),
   // lead.gain(0.4).orbit(2),
-  // bass2.gain(0.2).orbit(2),
-  // hhfill.gain(0.5),
+  bass2.gain(0.2).orbit(2),
+  hhfill.gain(0.5),
   // bk3.gain(0.3).orbit(2),
   pad.gain(0.2).orbit(2),
-  // notes.gain(0.1),
-  // hh.distort(sine.range(0, 1)),
+  notes.gain(0.1),
+  hh.distort(sine.range(0, 1)),
   // poly.gain(0.2),
-  // sn.orbit(2),
-  // sprinkle.orbit(2),
+  sn.orbit(2),
+  // sprinkle.gain(0.3).orbit(2),
 ).hpf(slider(0, 0, 1200))
 
 $: stack(

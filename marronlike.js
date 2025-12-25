@@ -1,0 +1,287 @@
+samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/refs/heads/master/strudel.json')
+setCpm(35)
+
+const kickpatterns = ["[0 [~ 0/8]] [0 0/2] 0 [0 0/16]"]
+const kickp = kickpatterns[0]
+
+const sineboom = note("A1!4 G#1!2").s("sine")
+   // .penv(-10)
+   .lpf(100)
+   .diode(1, 1)
+   .attack(0.1)
+   .fm("0 0.3 0.6 1")
+   .dec(0.1)
+   .room(0.2)
+   .gain(0.5)
+
+const kick = s(kickp).s("house")
+   .lpf(2200)
+   // .dec(0.1)
+   .diode(0.3, 1)
+
+const bassLong = note("c2 g2 g#3 g c c/2").s("z_sine,sine")
+  // .attack(0.1)
+  .dec(0.8)
+  .detune(2)
+  .fm(sine.range(-1, 2))
+  // .slide("-0.5 -0.45 -.3")
+  .lpe(8)
+  .lpf(800)
+  .distort(0.5)
+  .room(0.3)
+  // .size(10)
+  .gain(1)
+
+const bass2 = note("a1".fast(2)).s("z_sine")
+  .attack(0.5)
+  .cut(1)
+  .dec(0.05)
+  // .dec(sine.range(0, 0.2))
+  .detune(8)
+  .wt(sine.range(-1, 1))
+  .fm(sine.range(-2, 2))
+  .penv(2)
+  // .slide("-0.5 -0.45 -.3")
+  // .lpe(sine.range(2, 5))
+  .lpf(300)
+  .diode("2", 1)
+  .room(0.2)
+  // .distort(1)
+  // .size(10)
+  // .dec(0)
+
+
+const bass3 = note("a1 e1@2 a1".fast(2)).s("z_sine,sine")
+  // .attack(0.1)
+  .dec(0.0005)
+  // .dec(sine.range(0, 0.2))
+  .detune(8)
+  .penv(2)
+  // .wt(sine.range(-1, 4))
+  .fm(sine.range(-2, 8))
+  // .slide("-0.5 -0.45 -.3")
+  // .lpe(sine.range(2, 5))
+  .lpf(500)
+  .diode("1.5", 2)
+  .room(0.2)
+  // .distort(1)
+  // .size(10)
+  // .dec(0)
+
+// const g1 = s("bd bd bd 5").bank("RolandTR909")
+
+const lead = note("A,C#,E,G#,G#4,A5")
+  .arp("[0 [0 4]/2 [2,4] 0,5]".fast(4))
+  // .scale("A:minor")
+  .s("supersaw")
+  // .voicing()
+  // .phaser(2)
+  .dec(0.1)
+  .penv("2 4")
+  .fm(sine.range(-10, 10))
+  .fmh(sine.range(3, 0))
+  .lpe(berlin.range(4, 3))
+  // .distort(0.5)
+  .lpf(600)
+  .room(0.3)
+  .delay(0.5)
+
+
+const lead3 = note("D,F#,E,C#,A2")
+  .arp("[1 [3 4]/2 [0,0/3] [1/2 2/8]]".fast(4))
+  // .almostAlways(x => x.speed(0))
+  .penv(sine.range(0, cosine.range(-16, 16)))
+  // .scale("A:minor")
+  .s("supersaw,zsine")
+  // .voicing()
+  .phaser(2)
+  .dec(0.15)
+  .slide(-0.5)
+  .fm(0.5)
+  .fmh(sine.range(-32, 32))
+  // .fmh(0.2)
+  .lpe(berlin.range(4, 3))
+  // .distort(0.5)
+  .lpf(1000)
+  .room(0.3)
+  .size(5)
+  .delay(0.25)
+  // .hpf(1200)
+
+const bk = s("breakardo:33/4,sine")
+  .fit()
+  .scrub("{0 1*2 2 3}%4".seg(4).div(16))
+  .room(0.5)
+  .dec(0.1)
+  .delay(0.125)
+
+const bk2 = s("breakardo:30/4,sine")
+  .fit()
+  .scrub("{0 1 2 3 4 5 6 7}%8".seg(8).div(16))
+  .dec(1)
+  .lpf(1200)
+  // .delay(0.125)
+
+
+const bk3 = s("breakardo:6/4,sine")
+  .fit()
+  .scrub("{0 1*2 2 3}%4".seg(8).div(16))
+  .dec(0.5)
+  .delay(0.125)
+
+const pad = chord("Am9@64 Em9@64".slow(2))
+  .arp("[[1 1] 1@2 1/2 [1 1]]!2")
+  // .attack(0.3)
+  .dec(0.2)
+  .release("0.1")
+  .s("z_sine,wt_digital")
+  .wt(8)
+  // .slide(-0.5)
+  // .detune(sine.range(0, 1))
+  // .pw(0.5)
+  .lpf(sine.range(300, 5200))
+  .lpe(sine.range(-2, 2))
+  .fm(sine.range(-16,16))
+  .voicing()
+  .room(0.4)
+  // .delay(0.125)
+
+const pad3 = chord("Dm7@2 F#m7 C#m7".slow(4)).arp("[1 1 1 1]!2")
+  .attack(0.1)
+  .dec(0.2)
+  .release("0.1")
+  .s("supersaw,pulse")
+  // .slide(-0.5)
+  // .detune(sine.range(0, 1))
+  .pw(0.5)
+  .lpf(sine.range(300, 1200))
+  .lpe(sine.range(-2, 2))
+  .fm(sine.range(-16,16))
+  .voicing()
+  .room(0.5)
+  .delay(0.125)
+
+const notes = note("[g,a,[b,e],c#]")
+  .arp("0 [0,2/2] [0/8,2/2] [1, 0] [0,2,3]".fast(1))
+  .attack(0)
+  .s("sine")
+  .dec(0.1)
+  // .release("0.1")
+  .detune(sine.range(-8, 8))
+  // .pw(8)
+  .fm(sine.range(-1, 1))
+  .lpf(sine.range(500, 1200))
+  .lpe(sine.range(-8, 8))
+  // .fmh(sine.range(-1280000,1280000))
+  .room(0.8)
+  .delay(0.5)
+
+const hh = n("[~ ~ 0 ~]!4")
+  .gain(0.2)
+  .s("dr110_hh")
+  .distort(sine.range(0, 1))
+  .delay(0.25)
+
+const ride = n("[~ ~ 0 ~]!4")
+  .s("rd")
+  .dec(sine.range(0, 1))
+  .room(0.5)
+
+
+const cp = n("[~ ~ e2 ~] [~ ~ 0 [0/4 0/2]]")
+  .speed(2)
+  // .almostAlways(x => x.speed("2"))
+  .s("tr909_cp")
+  .dec(0.2)
+  // .dec(sine.range(0, 1))
+  .delay(0.125)
+
+const hhfill = n("[~ ~ 0 0]!4")
+  .s("rd")
+  .speed(0)
+  .every(4, x => x.speed(1))
+  .every(8, x => x.speed(2))
+  .every(2, x => x.dec(1))
+  .phaser(1.5)
+  .jux(rev)
+  .gain(0.1)
+  .dec(0.4)
+  .delay(0.125)
+
+const poly = s("koy dr hc kurt")
+  // .fast(2)
+  .distort(.8)
+  // .sometimes(x => x.slow(5))
+  .phaser(2)
+  .pan(sine.range(-0.5, 1))
+  .delay(0.125)
+
+const sn = note("~ ~ ~ e")
+  .s("sn:5")
+  // .fit()
+  // .sometimes(x => x.speed("1.5"))
+  // .attack(0.05)
+  .dec(0.3)
+  .release(1)
+  // .room(0.5)
+  // .distort(0.5)
+  .delay(0.8)
+  .jux(rev)
+  .phaser(2)
+  .gain(0.3)
+
+const sprinkle = n("8!10".add(berlin.fast(4).mul(14)))
+  // .scale("A")
+  .s("sine")
+  // .phaser(2)
+  .dec(0.1)
+  .fm(sine.range(-8, 16))
+  // .phaser(2)
+  .penv(8)
+  .fmh(tri.range(0, 1).fast(2))
+  // .slide("0.1 0 0 0")
+  // .lpe(32)
+  // .lpf(1500)
+  // .room(0.5)
+  // .delay(0.25)
+
+const tr = s("trainwhistle")
+ .dec(0.5)
+ .fm(8)
+ .pan("-1 1".slow(2))
+ .delay(0.125)
+
+$: stack(
+  kick.duckorbit(2).duckattack(0.2).duckdepth(0.6),
+  // .dec(0.1),
+  // lead.gain(0.3).orbit(2),
+  // tr,
+  // lead3.gain(slider(0.147, 0, 0.7)).orbit(2),
+  // sineboom.orbit(2),
+  // bass2.gain(0.2).orbit(2),
+  // bass3.gain(0./2).orbit(2),
+  hh.gain(0.25),
+  // ride.gain(1),
+  // cp.gain(0.4),
+  // hhfill.gain(0.6),
+  // pad.gain(0.15).orbit(2),
+  // pad3.gain(0.2).orbit(2),
+  notes.orbit(2).gain(1),
+  // poly.gain(0.05),
+  // sn.orbit(2),
+  // sprinkle.gain(0.4).orbit(2),
+).hpf(slider(657.6, 0, 1200))
+  // .scope()
+  // .pianoroll()
+
+$: stack(
+  bk.gain(0.3).pan(sine.range(0.5, 0.5)),
+  bk2.gain(0.5),
+  bk3.gain(0.1),
+).orbit(2).hpf(2200)
+
+  // .scope()
+  // .pianoroll()
+  // .scope()
+  // .hpf(slider(0, 0, 1200))
+
